@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User flow</title>
+<style>
+  /* Pipeline flow diagrams. Light and dark themes, stacks vertically under 640px. */
+  :root {
+    --bg: #f7f7f5; --surface: #ffffff; --ink: #1b1b19; --ink-2: #4a4a46; --mute: #696964;
+    --line: #e3e3df; --stage: #f0f0ed; --accent: #2f5bd3; --accent-soft: #eaf0ff;
+    --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f0f0e; --surface: #161615; --ink: #ededea; --ink-2: #bdbdb7; --mute: #8d8d88;
+            --line: #2c2c2a; --stage: #1f1f1d; --accent: #8fb0ff; --accent-soft: #1b2440; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.6 var(--font); padding: 40px 20px; }
+  main { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  h1 { margin: 0; font-size: 24px; letter-spacing: -.01em; }
+  .context { margin: 4px 0 0; color: var(--ink-2); }
+
+  .flow-diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: grid; gap: 18px; }
+  .flow-label { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .lozenge { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 6px; font: 600 10.5px/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; background: var(--ink); color: var(--surface); }
+  .flow-title { font-weight: 600; font-size: 15px; }
+
+  .flow-pipeline { display: flex; align-items: stretch; gap: 0; }
+  .flow-stage { flex: 1 1 0; min-width: 0; display: grid; place-items: center; text-align: center; padding: 14px 12px; border-radius: 10px; background: var(--stage); border: 1px solid var(--line); font-size: 13.5px; font-weight: 500; line-height: 1.35; }
+  .flow-connector { flex: 0 0 26px; position: relative; align-self: center; height: 2px; background: var(--line); }
+  .flow-connector::after { content: ""; position: absolute; right: -1px; top: 50%; width: 7px; height: 7px; border-top: 2px solid var(--line); border-right: 2px solid var(--line); transform: translateY(-50%) rotate(45deg); }
+
+  /* current (muted) vs proposed (accent) */
+  .flow-diagram--current .flow-stage { color: var(--ink-2); }
+  .flow-diagram--current .flow-stage:last-child { border-style: dashed; }
+  .flow-diagram--proposed .lozenge { background: var(--accent); color: var(--surface); }
+  .flow-diagram--proposed .flow-stage { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  .flow-diagram--proposed .flow-stage:last-child { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+  .flow-diagram--proposed .flow-connector, .flow-diagram--proposed .flow-return { --line: color-mix(in srgb, var(--accent) 55%, transparent); }
+
+  /* loop back to an earlier stage */
+  .flow-return { position: relative; height: 34px; margin: -6px 13% 0; border: 2px dashed var(--line); border-top: 0; border-radius: 0 0 14px 14px; }
+  .flow-return::before { content: ""; position: absolute; left: -6px; top: -4px; width: 8px; height: 8px; border-left: 2px solid var(--line); border-top: 2px solid var(--line); transform: rotate(45deg); }
+  .flow-return-label { position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); padding: 0 8px; background: var(--surface); font: 500 12px var(--mono); color: var(--mute); white-space: nowrap; }
+
+  /* alternative or error path under a stage */
+  .flow-stage-wrap { flex: 1 1 0; min-width: 0; display: grid; gap: 8px; }
+  .flow-branch { font-size: 12px; color: var(--mute); text-align: center; padding: 6px 8px; border: 1px dashed var(--line); border-radius: 8px; }
+  .flow-branch b { color: var(--ink-2); font-weight: 600; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; font-size: 13.5px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--mute); }
+  .table-wrap { overflow-x: auto; }
+  h2 { margin: 0 0 8px; font-size: 16px; }
+  ul { margin: 0; padding-left: 20px; color: var(--ink-2); }
+
+  @media (max-width: 640px) {
+    .flow-pipeline { flex-direction: column; }
+    .flow-connector { flex-basis: 22px; width: 2px; height: 22px; align-self: center; }
+    .flow-connector::after { right: 50%; top: auto; bottom: -1px; transform: translateX(50%) rotate(135deg); }
+    .flow-return { display: none; }
+    .flow-return-label { position: static; transform: none; display: block; text-align: center; }
+    .flow-diagram:has(.flow-return) .flow-pipeline::after { content: "↺ loops back"; text-align: center; font: 500 12px var(--mono); color: var(--mute); padding-top: 8px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Design system adoption with AI tools</h1>
+    <p class="context">User: product designer using an AI coding tool · Goal: consistent UI output · Success: every screen uses the system's tokens.</p>
+  </header>
+
+  <!-- Current flow (muted). Replace stages with yours. -->
+  <section class="flow-diagram flow-diagram--current" aria-label="Traditional method">
+    <div class="flow-label"><span class="lozenge">Traditional method</span><span class="flow-title">One-time styleguide → drift</span></div>
+    <div class="flow-pipeline">
+      <div class="flow-stage">Designer creates styleguide</div>
+      <div class="flow-connector" aria-hidden="true"></div>
+      <div class="flow-stage">AI reads it once</div>
+      <div class="flow-connector" aria-hidden="true"></div>
+      <div class="flow-stage">Guesses on gaps</div>
+      <div class="flow-connector" aria-hidden="true"></div>
+      <div class="flow-stage">Drifts each session</div>
+      <div class="flow-connector" aria-hidden="true"></div>
+      <div class="flow-stage">Inconsistent output</div>
+    </div>
+  </section>
+
+  <!-- Proposed flow (accent) with a return loop. -->
+  <section class="flow-diagram flow-diagram--proposed" aria-label="LLM-readable method">
+    <div class="flow-label"><span class="lozenge">LLM-readable method</span><span class="flow-title">Continuous spec → audit → enforce</span></div>
+    <div class="flow-pipeline">
+      <div class="flow-stage">Spec DS local to repo</div>
+      <div class="flow-connector" aria-hidden="true"></div>
+      <div class="flow-stage">AI reads specs</div>
+      <div class="flow-connector" aria-hidden="true"></div>
+      <div class="flow-stage">Uses tokens</div>
+      <div class="flow-connector" aria-hidden="true"></div>
+      <div class="flow-stage">Mandated audit looks for drift</div>
+      <div class="flow-connector" aria-hidden="true"></div>
+      <div class="flow-stage">Consistent output</div>
+    </div>
+    <div class="flow-return"><span class="flow-return-label">update specs with regular source sync</span></div>
+  </section>
+
+  <!-- Example of a branch under a stage: wrap the stage in .flow-stage-wrap
+  <div class="flow-stage-wrap">
+    <div class="flow-stage">Enters payment</div>
+    <div class="flow-branch"><b>Card declined</b> → back to payment with the reason</div>
+  </div>
+  -->
+
+  <section>
+    <h2>Steps</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>#</th><th>Stage</th><th>Actor</th><th>Sees</th><th>Does</th><th>If it fails</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Spec DS local to repo</td><td>Designer</td><td>Token and component specs as files</td><td>Commits specs next to the code</td><td>Specs missing → audit flags every screen</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Edge cases and open questions</h2>
+    <ul><li>Who owns the spec sync, and how often does it run?</li></ul>
+  </section>
+</main>
+</body>
+</html>

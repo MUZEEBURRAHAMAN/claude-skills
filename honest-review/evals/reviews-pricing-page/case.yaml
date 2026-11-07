@@ -1,0 +1,12 @@
+schema_version: "1.1"
+name: reviews-pricing-page
+expected_outcome: |
+  The review states a one-sentence verdict (ship, ship after fixes, or rework).
+  Findings carry severity labels (Blocker, Major or Minor).
+  Each finding separates what is observed, why it matters, and what to do.
+  The review flags that both hero buttons have equal visual weight or that the plan buttons say "Submit".
+  The review flags low-contrast light grey text (e.g. #bbb or #ccc).
+  The review ends with a score out of 50.
+  The review contains no generic praise such as "great job" or "overall looks good".
+context:
+  scaffold_script: place-files.sh

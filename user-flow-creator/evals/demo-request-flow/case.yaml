@@ -1,0 +1,9 @@
+schema_version: "1.1"
+name: demo-request-flow
+expected_outcome: |
+  An HTML file is produced.
+  The HTML contains at least two pipeline diagrams, one for the current flow and one for the improved flow.
+  Each pipeline has a label lozenge and an outcome title.
+  Each pipeline has at least four stages joined by connectors.
+  The HTML includes a step table with stage, actor and failure case columns.
+  The HTML lists edge cases or open questions.

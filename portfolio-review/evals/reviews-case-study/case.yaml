@@ -1,0 +1,11 @@
+schema_version: "1.1"
+name: reviews-case-study
+expected_outcome: |
+  The review gives a 60-second verdict (would interview, maybe, or would pass).
+  The review states the designer positioning it reads in one sentence.
+  The review gives at least three fixes ranked by impact on getting interviews.
+  The review quotes or names specific text or sections from the case study.
+  The review includes a scorecard out of 35.
+  The review offers at least one example rewrite (title, summary or outcome).
+context:
+  scaffold_script: place-files.sh
