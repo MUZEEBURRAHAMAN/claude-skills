@@ -13,7 +13,7 @@ Eight Claude skills for design review, UX, writing and brand work. Each one was 
 | [user-flow-creator](user-flow-creator) | Draws user flows as HTML pipelines, current vs proposed |
 | [brandkit-deck](brandkit-deck) | Builds a brand kit and a matching 10-slide deck from a logo and theme |
 
-Each skill has a page with demos at https://muzeeb-portfolio-v2.vercel.app/skills.html
+Each skill has a page with demos at https://muzeeb-design.vercel.app/skills
 
 ## Install
 
