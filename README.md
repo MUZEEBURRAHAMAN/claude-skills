@@ -23,7 +23,7 @@ Each skill has two test cases in its `evals/` folder, run with `claude plugin ev
 | [antislop-content](antislop-content) | Removes AI writing patterns and keeps every fact |
 | [antislop-ui](antislop-ui) | Finds AI-default UI and rebuilds the page around the product |
 | [fact-checker](fact-checker) | Checks claims one by one, with a source for every verdict |
-| [user-flow-creator](user-flow-creator) | 50% | ux-flow-designer: 11% | 42% | **83%** |
+| [user-flow-creator](user-flow-creator) | Draws user flows as HTML pipelines, current vs proposed |
 | [brandkit-deck](brandkit-deck) | Builds a brand kit and a matching 10-slide deck from a logo and theme |
 
 Each skill has a page with demos at https://muzeeb-design.vercel.app/skills
