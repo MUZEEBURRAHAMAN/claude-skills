@@ -1,12 +1,4 @@
 schema_version: "1.1"
 name: audits-signup-form
-expected_outcome: |
-  Findings name elements with selectors from the code, such as #email or #close.
-  The audit flags inputs that rely on placeholders instead of labels.
-  The audit flags the icon-only close button having no accessible name.
-  The audit reports a measured or estimated contrast ratio as a number for the light text or button.
-  The audit cites WCAG success criteria for accessibility findings.
-  Each finding includes a concrete code fix.
-  The report includes a section listing the states checked (for example error, loading or disabled).
 context:
   scaffold_script: place-files.sh

@@ -1,8 +1,2 @@
 schema_version: "1.1"
 name: cleans-linkedin-post
-expected_outcome: |
-  The rewrite contains no em dash characters.
-  The rewrite removes "Here's the thing", "Let that sink in", "Full stop" and "And that's okay".
-  The rewrite does not use a "not X, it's Y" contrast.
-  The rewrite keeps the facts: 6 months, Omnis AI, and 40% fewer UI inconsistencies.
-  The response reports a before and after score out of 50.

@@ -1,11 +1,4 @@
 schema_version: "1.1"
 name: fixes-generic-landing
-expected_outcome: |
-  The review identifies the purple-to-blue gradient hero as a generic tell.
-  The review identifies emoji used as feature icons.
-  The review flags the unverified social proof ("Trusted by 10,000+ teams", the testimonial or the uptime numbers).
-  The review ties the new direction to the actual product described in the footer (a task manager for design agencies tracking client feedback).
-  The response provides edited CSS or HTML, or a revised landing.html.
-  The proposed palette lists colours with HEX values.
 context:
   scaffold_script: place-files.sh

@@ -1,6 +1,19 @@
 # Claude skills by Muzeeb Urrahaman
 
-Eight Claude skills for design review, UX, writing and brand work. Each one was tested on a realistic task against plain Claude. With the skill, the runs passed 49 of 50 checks. Without it, they passed 36 of 50.
+Eight Claude skills for design review, UX, writing and brand work, each benchmarked against plain Claude and the closest comparable skill.
+
+| Skill | No skill | Comparable skill | v1.0 | v1.1 |
+|---|---|---|---|---|
+| [honest-review](honest-review) | 64% | design-critique: 68% | 100% | **100%** |
+| [ux-assistant](ux-assistant) | 69% | accessibility-auditor: 77% | 100% | **100%** |
+| [portfolio-review](portfolio-review) | 75% | design-critique: 79% | 92% | **92%** |
+| [antislop-content](antislop-content) | 75% | stop-slop: 92% | 92% | **92%** |
+| [antislop-ui](antislop-ui) | 100% | impeccable: 100% | 100% | **98%** |
+| [fact-checker](fact-checker) | 85% | deep-research: 85% | 92% | **98%** |
+| [user-flow-creator](user-flow-creator) | 50% | ux-flow-designer: 11% | 42% | **50%** |
+| [brandkit-deck](brandkit-deck) | 64% | ui-ux-pro-max · brand: 86% | 86% | **86%** |
+
+Each skill has two test cases in its `evals/` folder, run with `claude plugin eval` in clean sessions and graded against written checks. Details and per-case scores are on each skill's page at https://muzeeb-design.vercel.app/skills
 
 | Skill | What it does |
 |---|---|

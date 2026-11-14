@@ -1,10 +1,2 @@
 schema_version: "1.1"
 name: tidewell-brand-and-deck
-expected_outcome: |
-  An HTML file is produced containing a brand board and deck slides.
-  The brand board lists at least five colours with HEX values and a job for each.
-  Contrast ratios are shown for text colour pairings.
-  At most two type families are used, from freely licensed sources.
-  The deck contains ten slides.
-  Unknown facts such as traction or market size are marked as placeholders or assumptions, not invented.
-  Logo directions are shown as SVG or described wordmarks.

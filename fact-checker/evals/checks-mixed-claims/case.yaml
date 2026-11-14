@@ -1,9 +1,2 @@
 schema_version: "1.1"
 name: checks-mixed-claims
-expected_outcome: |
-  The Eiffel Tower claim is judged correct.
-  The Great Wall visible from the Moon claim is judged incorrect.
-  The WCAG 2.2 claim is judged correct.
-  The Adobe-Figma acquisition claim is judged incorrect, noting the deal was abandoned.
-  The Medicare G0023/G0024 claim is judged correct or partly correct.
-  Verdicts are presented per claim with sources.
